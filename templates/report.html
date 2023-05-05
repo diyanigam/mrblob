@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Mr. Blob</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+</head>
+  <style>
+    body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+    color: #fff;
+    font-size: 25px;
+    line-height: 1.5;
+    font-family: 'Inter';
+    background-image:url("/templates/bg.svg");
+  }
+
+  .box{
+    background-color: #62CCC6;
+    width: 90vw;
+    height: 50vw;
+    border-radius: 20px;
+
+  }
+
+button {
+    float: right;
+    position: absolute;
+    padding: 15px 40px;
+    font-size: 30px;
+    right: 0;
+    margin-right: 130px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    background: #fff;
+    border-radius: 15px;
+    cursor: pointer;
+    color: #62CCC6;
+    }
+
+.ecg{
+    margin: auto;
+    text-align: center;
+    font-weight: bold;
+    width: 70vw;
+    border: 10px solid #D9D9D9;
+}
+
+.img1{
+    position: relative;
+    z-index: 200;
+    margin: 40px;
+    width: 20px;
+  }
+
+.info{
+    margin: auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+h1{
+    margin-top: -50px;
+}
+
+p{
+    text-align: left;
+    padding-left: 10vw;
+}
+
+  </style>
+</head>
+<body>
+    <div class ="box">
+        <a href="drop.html"><img class="img1" src="arrow.png"></a>
+        <div class = "info">
+        <h1>Electrocardiogram Report</h1>
+        <img id= "ecg"class = "ecg" src = "/static/ecg.png">
+        <p>
+        Average Heart-Rate:  100bpm <br>
+        Heart Beat: Normal <br>
+        Arrhythmia Detected: No <br>
+        Arrhythmia Type: nil<br>
+        Anxiety Detected: No<br>
+        </p>
+
+        </div>
+        
+        <button onclick= "savePDF()">Save as PDF</button>
+
+    </div>
+
+
+<script>
+        function savePDF() {
+          var doc = new jsPDF();
+          var text = document.querySelectorAll('p')[0].innerText;
+          var img = document.querySelector('.ecg');
+          //doc.text(text);
+          doc.addImage(img, 'JPEG', 10, 10, 190, 35);
+          doc.text(text, 10, 60);
+          doc.save('report.pdf');
+        }
+</script>
+
+</body>
+</html>
