@@ -688,6 +688,7 @@ function drawStartScreen() {
 }
 
 function animate() {
+  
   var now = window.performance.now();
   var dt = now - lastTime;
   if (dt > 100) dt = 100;
@@ -704,6 +705,7 @@ function animate() {
   ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
   if (hasGameStarted) {
     drawGame(false);
+
   } else {
     drawStartScreen();
   }
@@ -751,8 +753,18 @@ function onKeyUp(e) {
 // ###################################################################
 // Start game
 // ###################################################################
+
 window.onload = function() {
-  init();
-  animate();
-  document.getElementById("textInput").disabled = false;
+  // Initialize canvas game
+
+  
+  // Add key listener for "Enter" key
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "Alt") {
+      init();
+      animate();
+    }
+
+  });
+
 };
